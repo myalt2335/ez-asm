@@ -232,9 +232,7 @@ std::string translateLine(const std::string& raw, const AsmDefinition* def, cons
     if (it==def->dict.end()) return "";
     std::string tmpl = it->second;
     std::string a,b,c; iss >> a >> b >> c;
-    // Do not strip closing parenthesis here; resolveOperand
-    // needs the full "imm(base)" form (e.g., "0(x1)") to
-    // transform it into a valid C expression like "(x1 + 0)".
+    // !!!Do not strip closing parenthesis here!!! resolveOperand needs the full "imm(base)" form (e.g., "0(x1)") to transform it into a valid C expression like "(x1 + 0)".
     auto norm=[&](std::string& t){
         if (!t.empty() && t.back()==',') t.pop_back();
     };
@@ -475,3 +473,4 @@ int main(int argc, char* argv[]) {
     }
     return 0;
 }
+
