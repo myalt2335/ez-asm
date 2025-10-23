@@ -4,7 +4,6 @@
 inline AsmDefinition RISCVRV32I(
     "RISC-V",
     "RV32I",
-    // Registers (RV32 has 32 (shocker))
     {"x0","x1","x2","x3","x4","x5","x6","x7","x8","x9","x10","x11","x12","x13","x14","x15",
      "x16","x17","x18","x19","x20","x21","x22","x23","x24","x25","x26","x27","x28","x29","x30","x31"},
     {
@@ -59,7 +58,7 @@ inline AsmDefinition RISCVRV32I(
         {"ecall", "system_call();"},
         {"ebreak","debug_break();"},
 
-        // Macros a compiler would likely have
+        // Macros a compiler would likely have? I hope
         {"print", "a7 = 4; a0 = (intptr_t){s1}; system_call();"},
         // RISC-V Linux ABI: exit is syscall 93. Default to status 0.
         {"exit",  "a0 = 0; a7 = 93; system_call();"},
@@ -67,3 +66,4 @@ inline AsmDefinition RISCVRV32I(
         {"mv",    "{d} = {s1};"}
     }
 );
+
