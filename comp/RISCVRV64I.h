@@ -4,7 +4,6 @@
 inline AsmDefinition RISCVRV64I(
     "RISC-V",
     "RV64I",
-    // RV64 has the same 32 integer regs x0..x31
     {"x0","x1","x2","x3","x4","x5","x6","x7","x8","x9","x10","x11","x12","x13","x14","x15",
      "x16","x17","x18","x19","x20","x21","x22","x23","x24","x25","x26","x27","x28","x29","x30","x31"},
     {
@@ -44,7 +43,7 @@ inline AsmDefinition RISCVRV64I(
         {"sraiw", "{d} = (int64_t)(int32_t)(((int32_t){s1}) >> ({imm} & 0x1F));"},
 
         // Load / store 
-        // Note: On RV64, LW sign-extends; LWU zero-extends; LD is 64-bit.
+        // On RV64, LW sign-extends; LWU zero-extends; LD is 64-bit.
         {"lb",  "{d} = (int64_t)(int8_t)(*(int8_t*)({s1}));"},
         {"la",  "{d} = (uintptr_t){s1};"},
         {"lh",  "{d} = (int64_t)(int16_t)(*(int16_t*)({s1}));"},
@@ -77,8 +76,8 @@ inline AsmDefinition RISCVRV64I(
         {"ecall", "system_call();"},
         {"ebreak","debug_break();"},
 
-        // Pseudo / convenience (compiler-level) 
-        // Note: 'sext.w' is commonly a pseudo for ADDIW rd, rs, 0 on RV64
+        // Pseudo / convenience
+        // 'sext.w' is commonly a pseudo for ADDIW rd, rs, 0 on RV64
         {"sext.w","{d} = (int64_t)(int32_t){s1};"},
         {"print", "a7 = 4; a0 = (intptr_t){s1}; system_call();"},
         {"exit", "a0 = (uint64_t){s1}; a7 = 93; system_call();"},
@@ -86,3 +85,4 @@ inline AsmDefinition RISCVRV64I(
         {"mv",    "{d} = {s1};"}
     }
 );
+
